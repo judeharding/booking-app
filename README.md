@@ -27,3 +27,13 @@ you also can use "values" with %v within the text and at the end , varName
 
 fmt.Scan() // waits for user input. don't forget to enter an ampersand &varName so that the code POINTS (&) at a memory location waiting for user input.
 // it is usually used in conjunction with an fmt.Println above it so the user KNOWS they have to enter something for the program to continue.
+
+Arrays and Slices are ways to STORE data entered in a variable.
+
+<!-- var bookings = [definelength ]data type is string {elementvalues}
+an array datatype consists of the number of elements it will contain along with their type = [50]string .  ps arrays are zero-based-->
+
+var bookings = [50]string {}
+
+ARRAYS are used for FIXED length data ex theater tickets
+SLICES are used for DYNAMIC length data ex fair tickets - it's an array with out a size definition - uses the keyword APPEND

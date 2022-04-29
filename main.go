@@ -9,13 +9,13 @@ func main() {
 
 	const conferenceTickets int = 50
 	var remainingTickets uint = 50
-	conferenceName := "Go Conference"
-	bookings := []string{}
+	var conferenceName string = "Go Conference" // OR conferenceName := "Go Conference"
+	var bookings = []string{} // no defined length makes this a SLICE
 
-	fmt.Printf("Welcome to %v booking application.\nWe have total of %v tickets and %v are still available.\nGet your tickets here to attend\n", conferenceName, conferenceTickets, remainingTickets)
+	fmt.Printf("\n\nWelcome to %v booking application.\nWe have total of %v tickets and %v are still available.\nGet your tickets here to attend\n", conferenceName, conferenceTickets, remainingTickets)
 
 
-		// PLAIN FOR LOOP
+		// A PLAIN FOR LOOP
 	for {
 		var firstName string
 		var lastName string
@@ -23,6 +23,7 @@ func main() {
 		var userTickets uint
 
 		// asking for user input
+		fmt.Println("*****  NEW RECORD  *****")
 		fmt.Println("Enter Your First Name: ")
 		fmt.Scanln(&firstName)
 
@@ -42,30 +43,47 @@ func main() {
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
-			// book ticket in system
+			// LOGIC for book ticket in system
 			remainingTickets = remainingTickets - userTickets
+
+			// putting items into the array called bookings
 			bookings = append(bookings, firstName+" "+lastName)
 
+
+			// CONLOG NOTES
+			fmt.Println("\n-------------------------")
+			// printing WHOLE array 
+			fmt.Printf("The WHOLE slice is : %v\n", bookings)
+			fmt.Printf("The FIRST value in the array is : %v\n", bookings[0])
+			fmt.Printf("The slice TYPE is : %T\n", bookings)
+			fmt.Printf("The slice LENGTH is : %v\n\n", len(bookings))
+
+			fmt.Println("-------------------------")
 			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-			fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+			fmt.Printf("%v tickets remaining for %v\n\n", remainingTickets, conferenceName)
+			fmt.Println("*****  END OF RECORD  *****")
+
 
 			// print only first names
 			firstNames := []string{}
+			// 
 			for _, booking := range bookings {
 				var names = strings.Fields(booking)
 				firstNames = append(firstNames, names[0])
 			}
 			fmt.Printf("The first names %v\n", firstNames)
 
+			// LOGIC for tickets remaing 
 			// exit application if no tickets are left
 			if remainingTickets == 0 {
-				// end program
+				// END FOR LOOP and program
 				fmt.Println("Our conference is booked out. Come back next year.")
 				break
 			}
 		} else {
+			// LOGIC for user data entry
 			if !isValidName {
-				fmt.Println("firt name or last name you entered is too short")
+				fmt.Println("first name or last name you entered is too short")
 			}
 			if !isValidEmail {
 				fmt.Println("email address you entered doesn't contain @ sign")
@@ -73,7 +91,7 @@ func main() {
 			if !isValidTicketNumber {
 				fmt.Println("number of tickets you entered is invalid")
 			}
-			continue
+			continue  // continue starts the outside for loop again
 		}
 	}
 }
