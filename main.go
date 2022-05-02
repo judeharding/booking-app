@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"strings"
+	"fmt"     // fmt pkg allows for input/output
+	"strings" // strings pkg allows for separation on a space character in a field
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 	fmt.Printf("\n\nWelcome to %v booking application.\nWe have total of %v tickets and %v are still available.\nGet your tickets here to attend\n", conferenceName, conferenceTickets, remainingTickets)
 
 
-		// A PLAIN FOR LOOP
+		// A PLAIN FOR LOOP that keeps running while there are tickets left
 	for {
 		var firstName string
 		var lastName string
@@ -37,9 +37,9 @@ func main() {
 		fmt.Scanln(&userTickets)
 
 		// validate user input
-		isValidName := len(firstName) >= 2 && len(lastName) >= 2
-		isValidEmail := strings.Contains(email, "@")
-		isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+		var isValidName bool = len(firstName) >= 2 && len(lastName) >= 2
+		var isValidEmail bool = strings.Contains(email, "@")
+		var isValidTicketNumber bool = userTickets > 0 && userTickets <= remainingTickets
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
@@ -64,9 +64,9 @@ func main() {
 			fmt.Println("*****  END OF RECORD  *****")
 
 
-			// print only first names
+			// create a SLICE of first names
 			firstNames := []string{}
-			// 
+			// print only first names FOR EACH LOOP
 			for _, booking := range bookings {
 				var names = strings.Fields(booking)
 				firstNames = append(firstNames, names[0])

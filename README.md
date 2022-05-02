@@ -1,5 +1,5 @@
 https://www.youtube.com/watch?v=yyUHQIec83I
-at 45 min mark
+at 154 min mark
 
 pkg std lib
 https://pkg.go.dev/std
