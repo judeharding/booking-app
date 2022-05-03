@@ -1,5 +1,5 @@
 https://www.youtube.com/watch?v=yyUHQIec83I
-at 154 min mark
+at 204 min mark
 
 pkg std lib
 https://pkg.go.dev/std
@@ -37,3 +37,14 @@ var bookings = [50]string {}
 
 ARRAYS are used for FIXED length data ex theater tickets
 SLICES are used for DYNAMIC length data ex fair tickets - it's an array with out a size definition - uses the keyword APPEND
+
+FUNCTIONS
+you can create functions outside the main.go -> func main(){} block.
+then CALL them INSIDE the func main(){} block.
+.... func main( ){
+...... greetusers(passedNameArgs) // passing a possible varname
+.... }
+
+    func greetusers(paramName string){
+      // do something
+    }

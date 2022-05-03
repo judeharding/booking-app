@@ -12,7 +12,10 @@ func main() {
 	var conferenceName string = "Go Conference" // OR conferenceName := "Go Conference"
 	var bookings = []string{} // no defined length makes this a SLICE
 
-	fmt.Printf("\n\nWelcome to %v booking application.\nWe have total of %v tickets and %v are still available.\nGet your tickets here to attend\n", conferenceName, conferenceTickets, remainingTickets)
+
+	greetUsers(conferenceName, remainingTickets)
+
+	
 
 
 		// A PLAIN FOR LOOP that keeps running while there are tickets left
@@ -96,6 +99,22 @@ func main() {
 	}
 }
 
+
+
+func greetUsers(confName string, confTix uint){  //mm 204
+	fmt.Printf("\n\nWELCOME NEWBIE to the %v booking app\n", confName)
+	fmt.Printf("We have total of  %v tickets available.\n", confTix )
+	fmt.Println("Get your tickets here to attend\n")
+
+}
+// func greetUsers(confName string, confTickets int, remainTickets, uint){
+// 	fmt.Print("WELCOME NEWBIE\n")
+// 	// fmt.Printf("\n\nWelcome to %v booking application.\n
+// 	// We have total of %v tickets and %v are still available.\n
+// 	// Get your tickets here to attend\n", 
+// 	// confName, confTickets, remainTickets)
+
+// }
 // 	// Switch statement example
 // 	city := "London"
 
