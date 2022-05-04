@@ -7,13 +7,13 @@ import (
 
 func main() {
 
-	const conferenceTickets int = 50
+	const conferenceTickets uint = 50
 	var remainingTickets uint = 50
 	var conferenceName string = "Go Conference" // OR conferenceName := "Go Conference"
 	var bookings = []string{} // no defined length makes this a SLICE
 
 
-	greetUsers(conferenceName, remainingTickets)
+	greetUsers(conferenceName, conferenceTickets,  remainingTickets)
 
 	
 
@@ -101,23 +101,18 @@ func main() {
 
 
 
-func greetUsers(confName string, confTix uint){  //mm 204
-	fmt.Printf("\n\nWELCOME NEWBIE to the %v booking app\n", confName)
-	fmt.Printf("We have total of  %v tickets available.\n", confTix )
-	fmt.Println("Get your tickets here to attend\n")
+func greetUsers(conferenceName string, conferenceTickets uint, remainingTickets uint){  //mm 204
+	fmt.Printf("\n\nWELCOME NEWBIE to the %v booking app\n", conferenceName)
+	fmt.Printf("We have total of  %v tickets and %v are available.\n", conferenceTickets, remainingTickets)
+	fmt.Println("Get your tickets here to attend")
+	fmt.Println("")
 
 }
-// func greetUsers(confName string, confTickets int, remainTickets, uint){
-// 	fmt.Print("WELCOME NEWBIE\n")
-// 	// fmt.Printf("\n\nWelcome to %v booking application.\n
-// 	// We have total of %v tickets and %v are still available.\n
-// 	// Get your tickets here to attend\n", 
-// 	// confName, confTickets, remainTickets)
 
-// }
+
+
 // 	// Switch statement example
 // 	city := "London"
-
 // 	switch city {
 // 	case "New York":
 // 		// booking for New York conference
