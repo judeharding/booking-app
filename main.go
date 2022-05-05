@@ -5,52 +5,32 @@ import (
 	"strings" // strings pkg allows for separation on a space character in a field
 )
 
+// DEFINING PACKAGE LEVEL VARS are available to ALL functions on this page
+const conferenceTickets uint = 50
+var remainingTickets uint = 50
+var conferenceName string = "Go Conference" // OR conferenceName := "Go Conference"
+var bookings = []string{} // no defined length makes this a SLICE
+
 func main() {
 
-	const conferenceTickets uint = 50
-	var remainingTickets uint = 50
-	var conferenceName string = "Go Conference" // OR conferenceName := "Go Conference"
-	var bookings = []string{} // no defined length makes this a SLICE
-
-
-	greetUsers(conferenceName, conferenceTickets,  remainingTickets)
-
-	
-
+	// greetUsers(conferenceName, conferenceTickets,  remainingTickets)
+	greetUsers()
 
 		// A PLAIN FOR LOOP that keeps running while there are tickets left
 	for {
-		var firstName string
-		var lastName string
-		var email string
-		var userTickets uint
+	
+		firstName, lastName, email, userTickets := getUserInput()
+		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets, remainingTickets)
+		
 
-		// asking for user input
-		fmt.Println("*****  NEW RECORD  *****")
-		fmt.Println("Enter Your First Name: ")
-		fmt.Scanln(&firstName)
 
-		fmt.Println("Enter Your Last Name: ")
-		fmt.Scanln(&lastName)
-
-		fmt.Println("Enter Your Email: ")
-		fmt.Scanln(&email)
-
-		fmt.Println("Enter number of tickets: ")
-		fmt.Scanln(&userTickets)
-
-		// validate user input
-		var isValidName bool = len(firstName) >= 2 && len(lastName) >= 2
-		var isValidEmail bool = strings.Contains(email, "@")
-		var isValidTicketNumber bool = userTickets > 0 && userTickets <= remainingTickets
+		// validate user input func
+		validateUserInput(firstName, lastName, email, userTickets, remainingTickets)
+		
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
-			// LOGIC for book ticket in system
-			remainingTickets = remainingTickets - userTickets
-
-			// putting items into the array called bookings
-			bookings = append(bookings, firstName+" "+lastName)
+			bookTicket(remainingTickets, userTickets, firstName, lastName, email)
 
 
 			// CONLOG NOTES
@@ -62,19 +42,13 @@ func main() {
 			fmt.Printf("The slice LENGTH is : %v\n\n", len(bookings))
 
 			fmt.Println("-------------------------")
-			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-			fmt.Printf("%v tickets remaining for %v\n\n", remainingTickets, conferenceName)
-			fmt.Println("*****  END OF RECORD  *****")
+		
 
-
-			// create a SLICE of first names
-			firstNames := []string{}
-			// print only first names FOR EACH LOOP
-			for _, booking := range bookings {
-				var names = strings.Fields(booking)
-				firstNames = append(firstNames, names[0])
-			}
-			fmt.Printf("The first names %v\n", firstNames)
+			// call function print first names
+			getFirstNames()
+			// receiving a value from the function
+			firstNames := getFirstNames(bookings)
+			fmt.Printf("\n\nThe first names are:  %v\n\n", firstNames)
 
 			// LOGIC for tickets remaing 
 			// exit application if no tickets are left
@@ -101,13 +75,69 @@ func main() {
 
 
 
-func greetUsers(conferenceName string, conferenceTickets uint, remainingTickets uint){  //mm 204
+func greetUsers(){  
 	fmt.Printf("\n\nWELCOME NEWBIE to the %v booking app\n", conferenceName)
 	fmt.Printf("We have total of  %v tickets and %v are available.\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 	fmt.Println("")
-
 }
+
+func getFirstNames() []string {
+	// create a SLICE of first names
+	firstNames := []string{}
+	// print only first names FOR EACH LOOP
+	for _, booking := range bookings {
+		var names = strings.Fields(booking)
+		firstNames = append(firstNames, names[0])
+	}
+	// fmt.Printf("\n\nThe first names are:  %v\n\n", firstNames)
+	// RETURNING A VALUE also has to be stated at the top of this func between the () and {} and you return the TYPE
+	return firstNames
+}
+
+
+func validateUserInput(firstName string, lastName string, email string, userTickets uint, remainingTickets uint )(bool, bool, bool ){
+		isValidName  := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail  := strings.Contains(email, "@")
+		isValidTicketNumber  := userTickets > 0 && userTickets <= remainingTickets
+		// can return MULTIPLE values from a function  instead of 1
+		return isValidName, isValidEmail, isValidTicketNumber
+}
+
+func getUserInput()(string, string, string, uint){
+		// asking for user input
+		var firstName string
+		var lastName string
+		var email string
+		var userTickets uint
+
+		fmt.Println("*****  NEW RECORD  *****")
+		fmt.Println("\n\nEnter Your First Name: ")
+		fmt.Scanln(&firstName)
+
+		fmt.Println("Enter Your Last Name: ")
+		fmt.Scanln(&lastName)
+
+		fmt.Println("Enter Your Email: ")
+		fmt.Scanln(&email)
+
+		fmt.Println("Enter number of tickets: ")
+		fmt.Scanln(&userTickets)
+
+		return firstName, lastName, email, userTickets
+}
+
+func bookTicket(remainingTickets uint, userTickets uint, bookings []string, firstName string, lastName, string, email string, conferenceName string  ){
+	// LOGIC for book ticket in system
+	remainingTickets = remainingTickets - userTickets
+
+	// putting items into the array called bookings
+	bookings = append(bookings, firstName+" "+lastName)
+	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
+	fmt.Printf("%v tickets remaining for %v\n\n", remainingTickets, conferenceName)
+	fmt.Println("*****  END OF RECORD  *****")
+}
+
 
 
 
