@@ -45,6 +45,10 @@ then CALL them INSIDE the func main(){} block.
 ...... greetusers(passedNameArgs) // passing a possible varname
 .... }
 
-    func greetusers(paramName string){
+    func greetusers(paramName string)(datatypeofThingReturned){
       // do something
+      return something
     }
+
+    GLOBAL variables appear above the main func.
+    All other variables should be created when needed

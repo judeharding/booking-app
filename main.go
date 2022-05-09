@@ -6,10 +6,10 @@ import (
 )
 
 // DEFINING PACKAGE LEVEL VARS are available to ALL functions on this page
+// other variables should be as local as possible -- like name and email and usertickets
 const conferenceTickets int = 50
 var remainingTickets uint = 50
 var conferenceName string = "Go Conference" // OR conferenceName := "Go Conference"
-// **********var conferenceName = "Go Conference"
 var bookings = []string{} // no defined length makes this a SLICE
 
 
@@ -20,7 +20,7 @@ func main() {
 
 		// A PLAIN FOR LOOP that keeps running while there are tickets left
 	for {
-	
+	// get multi vars data from the same func
 		firstName, lastName, email, userTickets := getUserInput()
 		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets)
 
