@@ -50,5 +50,7 @@ then CALL them INSIDE the func main(){} block.
       return something
     }
 
-    GLOBAL variables appear above the main func.
+    PACKAGE variables appear above the main func.
+    GLOBAL variables are exported with a CapFirstLetterOfFunc
     All other variables should be created when needed
+    To run ALL packages inside the app, type -- go run . -- in terminal

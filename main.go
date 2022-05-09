@@ -1,6 +1,7 @@
 package main
 
 import (
+	"booking-app/helper"
 	"fmt"     // fmt pkg allows for input/output
 	"strings" // strings pkg allows for separation on a space character in a field
 )
@@ -22,7 +23,8 @@ func main() {
 	for {
 	// get multi vars data from the same func
 		firstName, lastName, email, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets)
+		// the capV below is receiving an exported value frm th helper package we created
+		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateUserInput(firstName, lastName, email, userTickets, remainingTickets)
 
 
 		// // validate user input func
@@ -121,14 +123,14 @@ func getUserInput() (string, string, string, uint) {
 		return firstName, lastName, email, userTickets
 }
 
-
-func validateUserInput(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
-	isValidName := len(firstName) >= 2 && len(lastName) >= 2
-	isValidEmail := strings.Contains(email, "@")
-	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
-	// can return MULTIPLE values from a function  instead of 1
-	return isValidName, isValidEmail, isValidTicketNumber
-}
+// MOVED TO HELPER.GO 
+// func validateUserInput(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
+// 	isValidName := len(firstName) >= 2 && len(lastName) >= 2
+// 	isValidEmail := strings.Contains(email, "@")
+// 	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+// 	// can return MULTIPLE values from a function  instead of 1
+// 	return isValidName, isValidEmail, isValidTicketNumber
+// }
 
 func greetUsers() {
 		fmt.Printf("Welcome to %v booking application.\nWe have total of %v tickets and %v are still available.\nGet your tickets here to attend\n", conferenceName, conferenceTickets, remainingTickets)
