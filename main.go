@@ -3,7 +3,6 @@ package main
 import (
 	"booking-app/helper"
 	"fmt" // fmt pkg allows for input/output
-	"strconv"
 	// strings pkg allows for separation on a space character in a field
 )
 
@@ -12,8 +11,16 @@ import (
 const conferenceTickets int = 50
 var remainingTickets uint = 50
 var conferenceName string = "Go Conference" // OR conferenceName := "Go Conference"
-var bookings = make([]map[string]string, 0) // no defined length makes this a LIST OF MAPS
+// var bookings = make([]map[string]string, 0) // no defined length makes this a LIST OF MAPS
 
+var bookings = make([]UserData, 0)
+type UserData struct {
+	firstName string
+	lastName string
+	email string
+	numberOfTickets uint
+	
+}
 
 
 func main() {
@@ -92,10 +99,11 @@ func printFirstNames() []string {
 	// print only first names FOR EACH LOOP
 	for _, booking := range bookings {	
 		// var names = strings.Fields(booking) // before we converted to a userData MAP
-		
-		firstNames = append(firstNames, booking["firstName"])
+		// firstNames = append(firstNames, booking["firstName"]) / WORKING WITH MAP
+		firstNames = append(firstNames, booking.firstName)
 
-		fmt.Printf("LIST OF BOOKINGS VIA MAP is %v:  \n", bookings)
+
+		fmt.Printf("LIST OF BOOKINGS VIA STRUCT is %v:  \n", bookings)
 	}
 
 	// fmt.Printf("\n\nThe first names are:  %v\n\n", firstNames)
@@ -150,11 +158,20 @@ func bookTicket(userTickets uint, firstName string, lastName string,  email stri
 	// bookings = append(bookings, firstName+" "+lastName)
 
 	// create a MAP for a user with datatypes and datavalues
-	var userData = make(map[string]string)
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets),10) //converts uint into string
+	// var userData = make(map[string]string) // working with a map
+
+	var userData = UserData{ // USING THE STRUCT
+		firstName: firstName,
+		lastName: lastName,
+		email: email,
+		numberOfTickets: userTickets,
+	}
+
+	// WORKING WITH A MAP
+	// userData["firstName"] = firstName
+	// userData["lastName"] = lastName
+	// userData["email"] = email
+	// userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets),10) //converts uint into string
 
 	bookings = append(bookings, userData)
 

@@ -55,4 +55,5 @@ then CALL them INSIDE the func main(){} block.
     All other variables should be created when needed
     To run ALL packages inside the app, type -- go run . -- in terminal
 
-A MAP allows you to store key/value pairs
+A MAP allows you to store key/value pairs - downside, they all have to be STRINGS
+A STRUCT allows you to store key/value pairs - but can be multiple datatypes.
