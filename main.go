@@ -191,7 +191,7 @@ func bookTicket(userTickets uint, firstName string, lastName string,  email stri
 
 func sendTicket(userTickets uint, firstName string, lastName string, email string){
 
-	time.Sleep(30 * time.Second)
+	time.Sleep(30 * time.Second) // simulating a server response time
 	// fmt.Printf("\n\n%v tickets for %v %v\n", userTickets, firstName, lastName )
 	var ticket = fmt.Sprintf("%v tickets for %v %v\n", userTickets, firstName, lastName)
 	fmt.Println("##############")
