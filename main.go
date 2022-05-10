@@ -4,7 +4,7 @@ import (
 	"booking-app/helper"
 	"fmt" // fmt pkg allows for input/output
 	"strconv"
-	"strings" // strings pkg allows for separation on a space character in a field
+	// strings pkg allows for separation on a space character in a field
 )
 
 // DEFINING PACKAGE LEVEL VARS are available to ALL functions on this page
@@ -12,7 +12,7 @@ import (
 const conferenceTickets int = 50
 var remainingTickets uint = 50
 var conferenceName string = "Go Conference" // OR conferenceName := "Go Conference"
-var bookings = make([]map[string]string, 0) // no defined length makes this a SLICE
+var bookings = make([]map[string]string, 0) // no defined length makes this a LIST OF MAPS
 
 
 
@@ -91,8 +91,11 @@ func printFirstNames() []string {
 	firstNames := []string{}
 	// print only first names FOR EACH LOOP
 	for _, booking := range bookings {	
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
+		// var names = strings.Fields(booking) // before we converted to a userData MAP
+		
+		firstNames = append(firstNames, booking["firstName"])
+
+		fmt.Printf("LIST OF BOOKINGS VIA MAP is %v:  \n", bookings)
 	}
 
 	// fmt.Printf("\n\nThe first names are:  %v\n\n", firstNames)
@@ -153,7 +156,7 @@ func bookTicket(userTickets uint, firstName string, lastName string,  email stri
 	userData["email"] = email
 	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets),10) //converts uint into string
 
-	bookings = append(bookings, firstName+" "+lastName)
+	bookings = append(bookings, userData)
 
 
 
