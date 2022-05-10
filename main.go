@@ -3,6 +3,7 @@ package main
 import (
 	"booking-app/helper"
 	"fmt" // fmt pkg allows for input/output
+	"sync"
 	"time"
 	// strings pkg allows for separation on a space character in a field
 )
@@ -22,7 +23,7 @@ type UserData struct {
 	numberOfTickets uint
 	
 }
-
+var wg = sync.WaitGroup{} // helps allow threads to finish before terminating program
 
 func main() {
 
@@ -43,13 +44,15 @@ func main() {
 		if isValidName && isValidEmail && isValidTicketNumber {
 
 			bookTicket(userTickets, firstName, lastName, email)
-			sendTicket(userTickets, firstName, lastName, email)
+			wg.Add(1)
+			go sendTicket(userTickets, firstName, lastName, email) // go starts a new THREAD (concurently )
 
 			firstNames := printFirstNames()
 			fmt.Printf("The first names %v\n", firstNames)
 
 			if remainingTickets == 0 {
 				// end program
+				// wg.Wait()
 				break
 
 
@@ -91,6 +94,7 @@ func main() {
 			}
 			continue  // continue starts the outside for loop again
 		}
+		wg.Wait()
 	}
 }
 
@@ -187,12 +191,13 @@ func bookTicket(userTickets uint, firstName string, lastName string,  email stri
 
 func sendTicket(userTickets uint, firstName string, lastName string, email string){
 
-	time.Sleep(10 * time.Second)
+	time.Sleep(30 * time.Second)
 	// fmt.Printf("\n\n%v tickets for %v %v\n", userTickets, firstName, lastName )
 	var ticket = fmt.Sprintf("%v tickets for %v %v\n", userTickets, firstName, lastName)
 	fmt.Println("##############")
 	fmt.Printf("\nSending ticket:\n %v to email address %v\n", ticket, email)
 	fmt.Println("##############")
+	wg.Done() 
 }
 
 // 	// Switch statement example
