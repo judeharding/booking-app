@@ -2,7 +2,8 @@ package main
 
 import (
 	"booking-app/helper"
-	"fmt"     // fmt pkg allows for input/output
+	"fmt" // fmt pkg allows for input/output
+	"strconv"
 	"strings" // strings pkg allows for separation on a space character in a field
 )
 
@@ -11,7 +12,8 @@ import (
 const conferenceTickets int = 50
 var remainingTickets uint = 50
 var conferenceName string = "Go Conference" // OR conferenceName := "Go Conference"
-var bookings = []string{} // no defined length makes this a SLICE
+var bookings = make([]map[string]string, 0) // no defined length makes this a SLICE
+
 
 
 func main() {
@@ -141,8 +143,20 @@ func bookTicket(userTickets uint, firstName string, lastName string,  email stri
 	// LOGIC for book ticket in system
 	remainingTickets = remainingTickets - userTickets
 
-	// putting items into the array called bookings
+	// // putting items into the array called bookings
+	// bookings = append(bookings, firstName+" "+lastName)
+
+	// create a MAP for a user with datatypes and datavalues
+	var userData = make(map[string]string)
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets),10) //converts uint into string
+
 	bookings = append(bookings, firstName+" "+lastName)
+
+
+
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 	fmt.Println("*****  END OF RECORD  *****")

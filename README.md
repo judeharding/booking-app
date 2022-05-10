@@ -1,5 +1,5 @@
 https://www.youtube.com/watch?v=yyUHQIec83I
-at 204 min mark
+at 249 min mark
 
 pkg std lib
 https://pkg.go.dev/std
@@ -54,3 +54,5 @@ then CALL them INSIDE the func main(){} block.
     GLOBAL variables are exported with a CapFirstLetterOfFunc
     All other variables should be created when needed
     To run ALL packages inside the app, type -- go run . -- in terminal
+
+A MAP allows you to store key/value pairs
