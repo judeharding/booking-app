@@ -3,6 +3,7 @@ package main
 import (
 	"booking-app/helper"
 	"fmt" // fmt pkg allows for input/output
+	"time"
 	// strings pkg allows for separation on a space character in a field
 )
 
@@ -42,6 +43,7 @@ func main() {
 		if isValidName && isValidEmail && isValidTicketNumber {
 
 			bookTicket(userTickets, firstName, lastName, email)
+			sendTicket(userTickets, firstName, lastName, email)
 
 			firstNames := printFirstNames()
 			fmt.Printf("The first names %v\n", firstNames)
@@ -183,7 +185,15 @@ func bookTicket(userTickets uint, firstName string, lastName string,  email stri
 }
 
 
+func sendTicket(userTickets uint, firstName string, lastName string, email string){
 
+	time.Sleep(10 * time.Second)
+	// fmt.Printf("\n\n%v tickets for %v %v\n", userTickets, firstName, lastName )
+	var ticket = fmt.Sprintf("%v tickets for %v %v\n", userTickets, firstName, lastName)
+	fmt.Println("##############")
+	fmt.Printf("\nSending ticket:\n %v to email address %v\n", ticket, email)
+	fmt.Println("##############")
+}
 
 // 	// Switch statement example
 // 	city := "London"
